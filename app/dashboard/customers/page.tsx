@@ -11,6 +11,7 @@ import { BackButton } from "../components/back-button";
 import { getCustomers } from "../core/api";
 import Link from "next/link";
 import { Eye } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Customers() {
   const { data, customersAreLoading } = getCustomers();
@@ -57,7 +58,11 @@ export default function Customers() {
           </TableBody>
         </Table>
       )}
-      {customersAreLoading && <div>Loading...</div>}
+      {customersAreLoading && (
+        <div className="mt-12">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }
