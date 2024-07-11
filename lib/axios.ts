@@ -6,6 +6,9 @@ export const api = axios.create({
     typeof window === "undefined"
       ? process.env.PUBLIC_URL
       : process.env.NEXT_PUBLIC_URL,
+  headers: {
+
+  },
 });
 api.interceptors.request.use((request) => {
   return request;

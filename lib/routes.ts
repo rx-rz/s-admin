@@ -12,14 +12,10 @@ export const adminRoutes = {
 
 export const customerRoutes = {
   create_customer: "/createCustomer",
-  login_customer: "/loginCustomer",
   list_customers: "/listCustomers",
   delete_customer: "/deleteCustomer",
   update_customer: "/updateCustomer",
   get_customer_details: "/getCustomerDetails",
-  update_customer_email: "/updateCustomerEmail",
-  update_customer_password: "/updateCustomerPassword",
-  update_customer_refresh_token: "/updateRefreshToken",
 } as const;
 
 export const paymentRoutes = {

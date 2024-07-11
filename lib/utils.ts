@@ -6,21 +6,18 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export type User = {
-  user: {
-    id: string;
-    role: "ADMIN" | "CUSTOMER";
-    email: string;
-    isVerified: boolean | null;
-    firstName: string | null;
-    lastName: string | null;
-  };
+  id: string;
+  email: string;
+  isVerified: boolean | null;
+  firstName: string | null;
+  lastName: string | null;
 };
 
 export function decodeUserToken(token: string | undefined) {
   if (token) {
-    const userToken = JSON.parse(
+    const user = JSON.parse(
       Buffer.from(token.split(".")[1], "base64").toString()
     ) as User;
-    return userToken.user;
+    return user;
   }
 }
