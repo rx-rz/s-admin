@@ -18,18 +18,15 @@ export default function BookingLayout({ children }: { children: ReactNode }) {
             >
               <UserIcon /> Customers
             </Link>
-            <Link href="" className="flex gap-5 items-center ">
+            <Link href="/dashboard/room" className="flex gap-5 items-center ">
               <Bed /> Rooms
             </Link>
-            <Link href="" className="flex gap-5 items-center ">
+            <Link href="/dashboard/roomtypes" className="flex gap-5 items-center ">
               <BedDouble />
               Room Types
             </Link>
-            <Link href="" className="flex gap-5 items-center ">
+            <Link href="/dashboard/bookings" className="flex gap-5 items-center ">
               <Book /> Bookings
-            </Link>
-            <Link href="" className="flex gap-5 items-center ">
-              <DollarSign /> Payments
             </Link>
           </div>
         </div>

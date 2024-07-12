@@ -172,3 +172,19 @@ export type GetRoomTypesResponse = {
   }[];
   isSuccess: boolean;
 };
+
+
+export type GetBookingsResponse = {
+  bookings: {
+    customerEmail: string | null;
+    id: string;
+    startDate: string;
+    endDate: string;
+    status: "pending" | "active" | "cancelled" | "done";
+    createdAt: string | null;
+    roomNo: number;
+    amount: string;
+  }[];
+  maxPageNo: number;
+  isSuccess: boolean;
+};

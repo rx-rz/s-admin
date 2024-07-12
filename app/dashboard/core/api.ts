@@ -2,6 +2,7 @@ import { api } from "@/lib/axios";
 import { createRoute } from "@/lib/routes";
 import useSWR from "swr";
 import {
+  GetBookingsResponse,
   GetCustomersResponse,
   GetRoomTypesResponse,
   GetRoomsResponse,
@@ -20,15 +21,12 @@ export const getCustomers = () => {
   );
   return { data, customersAreLoading };
 };
-export const getRooms = async () => {
+
+export const getRooms = () => {
   const fetcher = (url: string): Promise<GetRoomsResponse> => {
     return api.get(url);
   };
-  const {
-    data,
-    isLoading: roomsLoading,
-    error: roomsError,
-  } = useSWR<GetRoomsResponse>(
+  const { data, isLoading: roomsLoading } = useSWR(
     createRoute({
       prefix: "rooms",
       route: "/listRooms",
@@ -36,15 +34,45 @@ export const getRooms = async () => {
     fetcher
   );
   return {
-    rooms: data?.rooms,
+    rooms: data?.rooms || [],
+    maxPageNo: data?.maxPageNo || 0,
     roomsLoading,
-    roomsError,
-    maxPageNo: data?.maxPageNo,
   };
 };
 
-export const getRoomTypes = async () => {
+export const getBookings = () => {
+  const fetcher = (url: string): Promise<GetBookingsResponse> => {
+    return api.get(url);
+  };
+
+  const { data, isLoading: bookingsLoading } = useSWR(
+    createRoute({
+      prefix: "bookings",
+      route: "/listBookings",
+    }),
+    fetcher
+  );
+  return {
+    bookings: data?.bookings || [],
+    maxPageNo: data?.maxPageNo || 0,
+    bookingsLoading,
+  };
+};
+
+export const getRoomTypes = () => {
   const fetcher = (url: string): Promise<GetRoomTypesResponse> => {
     return api.get(url);
+  };
+
+  const { data, isLoading: roomTypesLoading } = useSWR(
+    createRoute({
+      prefix: "roomtypes",
+      route: "/getRoomTypes",
+    }),
+    fetcher
+  );
+  return {
+    roomTypes: data?.roomTypes || [],
+    roomTypesLoading,
   };
 };
