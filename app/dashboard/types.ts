@@ -63,6 +63,46 @@ export type GetCustomerDetailsResponse = {
   isSuccess: boolean;
 };
 
+export type GetBookingDetailsResponse = {
+  booking: {
+    payment:
+      | {
+          customerEmail: string;
+          roomNo: number;
+          amount: string;
+          id: string;
+          createdAt: string | null;
+          status: "pending" | "confirmed" | "failed";
+          payedAt: string | null;
+          reference: string;
+          bookingId: string;
+        }
+      | undefined;
+    customerEmail: string;
+    endDate: string;
+    roomNo: number;
+    startDate: string;
+    amount: string;
+    id: string;
+    createdAt: string | null;
+    status: "pending" | "active" | "cancelled" | "done";
+    customers: {
+      id: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+    };
+    room: {
+      roomNo: number;
+      createdAt: string | null;
+      status: "available" | "pending" | "booked" | null;
+      typeId: number;
+      noOfTimesBooked: number | null;
+    };
+  };
+  isSuccess: boolean;
+};
+
 export type GetPaymentDetailsResponse = {
   paymentDetails: {
     status: "pending" | "confirmed" | "failed";
@@ -129,6 +169,32 @@ export type GetRoomDetailsResponse = {
   isSuccess: boolean;
 };
 
+export type ListRoomQueries = {
+  limit: number;
+  pageNo: number;
+  orderBy:
+    | "roomNo"
+    | "createdAt"
+    | "status"
+    | "name"
+    | "price"
+    | "typeId"
+    | "noOfTimesBooked";
+  ascOrDesc: "asc" | "desc";
+  searchBy?:
+    | {
+        value: string | number;
+        key:
+          | "roomNo"
+          | "createdAt"
+          | "status"
+          | "name"
+          | "price"
+          | "typeId"
+          | "noOfTimesBooked";
+      }[]
+    | undefined;
+};
 export type GetRoomsResponse = {
   rooms: {
     typeId: number;
@@ -173,7 +239,6 @@ export type GetRoomTypesResponse = {
   isSuccess: boolean;
 };
 
-
 export type GetBookingsResponse = {
   bookings: {
     customerEmail: string | null;
@@ -186,5 +251,26 @@ export type GetBookingsResponse = {
     amount: string;
   }[];
   maxPageNo: number;
+  isSuccess: boolean;
+};
+
+export type GetRoomTypeDetailsResponse = {
+  roomTypeDetails: {
+    id: number;
+    name: string;
+    createdAt: string | null;
+    description: string | null;
+    price: string;
+    roomImageURLS: string[] | null;
+    features: string[] | null;
+    imageFileNames: string[] | null;
+    rooms: {
+      createdAt: string | null;
+      roomNo: number;
+      typeId: number;
+      status: "available" | "pending" | "booked" | null;
+      noOfTimesBooked: number | null;
+    }[];
+  };
   isSuccess: boolean;
 };

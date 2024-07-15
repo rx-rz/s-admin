@@ -6,6 +6,7 @@ import {
   GetCustomersResponse,
   GetRoomTypesResponse,
   GetRoomsResponse,
+  ListRoomQueries,
 } from "../types";
 
 export const getCustomers = () => {
@@ -22,9 +23,9 @@ export const getCustomers = () => {
   return { data, customersAreLoading };
 };
 
-export const getRooms = () => {
+export const getRooms = (queries?: Partial<ListRoomQueries>) => {
   const fetcher = (url: string): Promise<GetRoomsResponse> => {
-    return api.get(url);
+    return api.get(url, queries && { params: { ...queries } });
   };
   const { data, isLoading: roomsLoading } = useSWR(
     createRoute({
